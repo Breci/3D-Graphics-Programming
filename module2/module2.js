@@ -4,8 +4,8 @@ var gl = null,
         fragmentShader = null,
         vertexShader = null;
 
-var radius = 1.0;
-var angle = 20;
+var radius = 0.9;
+var angle = 10;
 
 function initWebGL()
 {
@@ -98,6 +98,6 @@ function drawScene()
         gl.drawArrays(gl.LINE_LOOP, 0, 360 / angle);
     else if (document.getElementById("point").checked)
         gl.drawArrays(gl.POINTS, 0, 360 / angle);
-    else
+    else if (document.getElementById("polygon").checked)
         gl.drawArrays(gl.TRIANGLE_FAN, 0, 360 / angle);
 }

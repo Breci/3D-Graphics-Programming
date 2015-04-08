@@ -2,20 +2,25 @@
 <html>
     <head>
         <title>Module 2</title>
+        <style>
+            #my-canvas {
+                background-color: black;
+            }
+        </style>
         <script id="shader-vs" type="x-shader/x-vertex">
-                uniform float radius;
-                attribute float angle;
-                varying float vAngle;
+            uniform float radius;
+            attribute float angle;
+            varying float vAngle;
 
-                vec4 transform(float a) {
-                        return vec4(sin(radians(a))*radius,cos(radians(a))*radius,0.0,1.0);
-                }
-			
-                void main(void) {
-                        vAngle = angle;
-                        gl_Position = transform(angle);
-                        gl_PointSize = 10.0;
-                }
+            vec4 transform(float a) {
+            return vec4(sin(radians(a))*radius,cos(radians(a))*radius,0.0,1.0);
+            }
+
+            void main(void) {
+            vAngle = angle;
+            gl_Position = transform(angle);
+            gl_PointSize = 10.0;
+            }
         </script>
         <script id="shader-fs" type="x-shader/x-fragment">
             varying highp float vAngle;
