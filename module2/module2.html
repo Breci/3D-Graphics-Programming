@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Module 2</title>
+        <script id="shader-vs" type="x-shader/x-vertex">
+                uniform float radius;
+                attribute float angle;
+                varying float vAngle;
+
+                vec4 transform(float a) {
+                        return vec4(sin(radians(a))*radius,cos(radians(a))*radius,0.0,1.0);
+                }
+			
+                void main(void) {
+                        vAngle = angle;
+                        gl_Position = transform(angle);
+                        gl_PointSize = 10.0;
+                }
+        </script>
+        <script id="shader-fs" type="x-shader/x-fragment">
+            varying highp float vAngle;
+
+            highp vec4 color(highp float a) {
+            return vec4((sin(radians(a))+1.0)/2.0, (cos(radians(a))+1.0)/2.0, 0.0, 1.0);
+            }
+
+            void main(void) {
+            gl_FragColor = color(vAngle);
+            }
+        </script>
+
+        <script src="module2.js"></script>
+    </head>
+    <body onload="initWebGL()">
+        <div style="background-color:white; width: 500px">
+            <input id="polygon" name="rendertype" type="radio" checked onclick="drawScene()">Polygon<br>
+            <input id="line" name="rendertype" type="radio" onclick="drawScene()">Line loop<br>
+            <input id="point" name="rendertype" type="radio" onclick="drawScene()">Point sprites
+        </div>
+        <canvas id="my-canvas" width="500" height="500">
+        </canvas>
+    </body>
+</html>
